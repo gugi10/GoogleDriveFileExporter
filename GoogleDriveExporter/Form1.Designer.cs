@@ -37,6 +37,7 @@
             this.loginTextBox = new System.Windows.Forms.TextBox();
             this.fileTypeComboBox = new System.Windows.Forms.ComboBox();
             this.fileTypeLabel = new System.Windows.Forms.Label();
+            this.helpButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // downloadButton
@@ -159,11 +160,22 @@
             this.fileTypeLabel.TabIndex = 14;
             this.fileTypeLabel.Text = "File type";
             // 
+            // helpButton
+            // 
+            this.helpButton.Location = new System.Drawing.Point(12, 543);
+            this.helpButton.Name = "helpButton";
+            this.helpButton.Size = new System.Drawing.Size(68, 21);
+            this.helpButton.TabIndex = 15;
+            this.helpButton.Text = "Help";
+            this.helpButton.UseVisualStyleBackColor = true;
+            this.helpButton.Click += new System.EventHandler(this.helpButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1120, 576);
+            this.Controls.Add(this.helpButton);
             this.Controls.Add(this.fileTypeLabel);
             this.Controls.Add(this.fileTypeComboBox);
             this.Controls.Add(this.loginTextBox);
@@ -200,6 +212,7 @@
         private System.Windows.Forms.TextBox loginTextBox;
         private System.Windows.Forms.ComboBox fileTypeComboBox;
         private System.Windows.Forms.Label fileTypeLabel;
+        private System.Windows.Forms.Button helpButton;
     }
 }
 

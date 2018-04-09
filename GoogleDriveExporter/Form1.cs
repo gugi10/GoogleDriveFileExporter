@@ -64,5 +64,12 @@ namespace GoogleDriveExporter {
         private void fileTypeComboBox_SelectedIndexChanged(object sender, EventArgs e) {
 
         }
+
+        private void helpButton_Click(object sender, EventArgs e) {
+            var result = MessageBox.Show("If you need help with generating api from google drive open: https://developers.google.com/drive/v3/web/quickstart/dotnet","Help",MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes) {
+                System.Diagnostics.Process.Start("https://developers.google.com/drive/v3/web/quickstart/dotnet");
+            }
+        }
     }
 }
