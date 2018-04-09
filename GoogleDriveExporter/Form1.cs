@@ -17,8 +17,8 @@ namespace GoogleDriveExporter {
         public Form1() {
             form1 = this;
             InitializeComponent();
-            driveManager = new DriveManager(this);
             InitializeTextBox();
+            InitializeDirveManager();
         }
         
         private void InitializeTextBox() {
@@ -27,13 +27,33 @@ namespace GoogleDriveExporter {
             System.Reflection.Assembly.GetExecutingAssembly().CodeBase)
             ).LocalPath;
             localPathToDownload.Text = System.IO.Path.GetFullPath(path);
+            loginTextBox.Text = "maciejsowiar";
+            passwordTextBox.Text = "4Dm!n";
+            pathToFtp.Text = "ftp://www.mkwk018.cba.pl/ftptestmaciejs.cba.pl/test.pdf";
+        }
+
+        private void InitializeDirveManager() {
+            driveManager = new DriveManager(this);
+            driveManager.InitializeDeviceService();
         }
        
         private void downloadButton_Click(object sender, EventArgs e) {
-            driveManager.InitializeDeviceService();
+            InitializeDirveManager();
             string pathToDownload = localPathToDownload.Text;
-            driveManager.DownloadFile(pathToDownload); 
+            driveManager.DownloadFile();
+            driveManager.LocalDownloadFile(localPathToDownload.Text);
         }
+
+        private void downloadAndSendToServer_Click(object sender, EventArgs e) {
+            InitializeDirveManager();
+            driveManager.DownloadFile();
+            SendFTP.SendFtpToServer(driveManager.streamS, loginTextBox.Text, passwordTextBox.Text, pathToFtp.Text);
+        }
+
+        private void pathToFtp_TextChanged(object sender, EventArgs e) {
+
+        }
+
         public static void UpdateDebugLog(string message) {
 
             form1.DebugLog.AppendText(DateTime.Now + "\n");
@@ -41,8 +61,8 @@ namespace GoogleDriveExporter {
             
         }
 
-        private void button1_Click(object sender, EventArgs e) {
-            
+        private void fileTypeComboBox_SelectedIndexChanged(object sender, EventArgs e) {
+
         }
     }
 }

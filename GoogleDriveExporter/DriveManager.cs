@@ -20,8 +20,10 @@ namespace GoogleDriveExporter {
         static string ApplicationName = "Drive API .NET Quickstart";
         DriveService service;
         Form1 mainForm;
+        public System.IO.MemoryStream streamS;
         public DriveManager(Form1 form) {
             mainForm = form;
+            streamS = new System.IO.MemoryStream();
         }
 
         public void InitializeDeviceService() {
@@ -49,10 +51,9 @@ namespace GoogleDriveExporter {
             });
         }
 
-        public void DownloadFile(string localPath) {
+        public void DownloadFile() {
             var fileId = "10mDzj3gWgsyNWuzoqj0qC2-wmpciUtBI-rW2PyRiaak";
             var request = service.Files.Export(fileId, "application/pdf");
-            var streamS = new System.IO.MemoryStream();
             printFile(service, fileId);
             request.MediaDownloader.ProgressChanged +=
             (IDownloadProgress progress) =>
@@ -74,13 +75,24 @@ namespace GoogleDriveExporter {
                 }
             };
             request.Download(streamS);
+            //using (FileStream fs = System.IO.File.Create(localPath + "\\GoogleDriveExporter.pdf")) {
+            //    Form1.UpdateDebugLog("Saving file");
+            //    Byte[] info = streamS.GetBuffer();
+            //    fs.Write(info, 0, info.Length);
+            //    //"\\GoogleDriveExporter.pdf
+            //}
+            //SendFTP.SendFtpToServer(streamS, localPath);
+        }
+
+        public void LocalDownloadFile(string localPath) {
             using (FileStream fs = System.IO.File.Create(localPath + "\\GoogleDriveExporter.pdf")) {
                 Form1.UpdateDebugLog("Saving file");
                 Byte[] info = streamS.GetBuffer();
                 fs.Write(info, 0, info.Length);
                 //"\\GoogleDriveExporter.pdf
+                fs.Close();
             }
-            SendFTP.e(streamS, localPath);
+            streamS.Close();
         }
 
 
@@ -91,7 +103,7 @@ namespace GoogleDriveExporter {
                 Form1.UpdateDebugLog("Title: " + file.Title);
                 Form1.UpdateDebugLog("Description: " + file.Description);
                 Form1.UpdateDebugLog("MIME type: " + file.MimeType);
-            }
+            }                   
             catch (Exception e) {
                 Form1.UpdateDebugLog("An error occured: " + e.Message);
                 Console.ReadKey();

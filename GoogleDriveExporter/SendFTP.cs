@@ -13,21 +13,13 @@ namespace GoogleDriveExporter {
         public SendFTP() {
             form = new Form1();
         }
-        public static void e(Stream stream, string path) {
-            // Get the object used to communicate with the server.
+        public static void SendFtpToServer(System.IO.MemoryStream stream, string login, string password, string ftpAdress) {
             FtpWebRequest request =
-                (FtpWebRequest)WebRequest.Create("ftp://www.mkwk018.cba.pl/ftptestmaciejs.cba.pl/test.pdf");
+                (FtpWebRequest)WebRequest.Create(ftpAdress);
             request.Method = WebRequestMethods.Ftp.UploadFile;
-            request.Credentials = new NetworkCredential("maciejsowiar", "4Dm!n");
-            //using (var resp = (FtpWebResponse)request.GetResponse()) {
-            //    Console.WriteLine(resp.StatusCode);
-            //}
-            //request.Method = WebRequestMethods.Ftp.UploadFile;
+            request.Credentials = new NetworkCredential(login, password);
             request.UseBinary = true;
-
-            StreamReader sourceStream = new StreamReader(path+@"\GoogleDriveExporter.pdf");
-            byte[] fileContents = Encoding.UTF8.GetBytes(sourceStream.ReadToEnd());
-            sourceStream.Close();
+            byte[] fileContents = stream.GetBuffer();
             request.ContentLength = fileContents.Length;
             Stream requestStream = request.GetRequestStream();
             requestStream.Write(fileContents, 0, fileContents.Length);

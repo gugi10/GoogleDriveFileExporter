@@ -28,7 +28,15 @@
             this.localPathToDownloadLabel = new System.Windows.Forms.Label();
             this.DebugLog = new System.Windows.Forms.RichTextBox();
             this.DebugLogLabel = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.downloadAndSendToServer = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pathToFtp = new System.Windows.Forms.TextBox();
+            this.login = new System.Windows.Forms.Label();
+            this.password = new System.Windows.Forms.Label();
+            this.passwordTextBox = new System.Windows.Forms.TextBox();
+            this.loginTextBox = new System.Windows.Forms.TextBox();
+            this.fileTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.fileTypeLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // downloadButton
@@ -37,7 +45,7 @@
             this.downloadButton.Name = "downloadButton";
             this.downloadButton.Size = new System.Drawing.Size(233, 24);
             this.downloadButton.TabIndex = 1;
-            this.downloadButton.Text = "Download locally";
+            this.downloadButton.Text = "Download";
             this.downloadButton.UseVisualStyleBackColor = true;
             this.downloadButton.Click += new System.EventHandler(this.downloadButton_Click);
             // 
@@ -74,22 +82,97 @@
             this.DebugLogLabel.TabIndex = 5;
             this.DebugLogLabel.Text = "Debug Logs";
             // 
-            // button1
+            // downloadAndSendToServer
             // 
-            this.button1.Location = new System.Drawing.Point(337, 285);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.downloadAndSendToServer.Location = new System.Drawing.Point(12, 266);
+            this.downloadAndSendToServer.Name = "downloadAndSendToServer";
+            this.downloadAndSendToServer.Size = new System.Drawing.Size(233, 23);
+            this.downloadAndSendToServer.TabIndex = 6;
+            this.downloadAndSendToServer.Text = "Download and send";
+            this.downloadAndSendToServer.UseVisualStyleBackColor = true;
+            this.downloadAndSendToServer.Click += new System.EventHandler(this.downloadAndSendToServer_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 103);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(46, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Ftp path";
+            // 
+            // pathToFtp
+            // 
+            this.pathToFtp.Location = new System.Drawing.Point(12, 119);
+            this.pathToFtp.Name = "pathToFtp";
+            this.pathToFtp.Size = new System.Drawing.Size(233, 20);
+            this.pathToFtp.TabIndex = 8;
+            this.pathToFtp.TextChanged += new System.EventHandler(this.pathToFtp_TextChanged);
+            // 
+            // login
+            // 
+            this.login.AutoSize = true;
+            this.login.Location = new System.Drawing.Point(12, 142);
+            this.login.Name = "login";
+            this.login.Size = new System.Drawing.Size(33, 13);
+            this.login.TabIndex = 9;
+            this.login.Text = "Login";
+            // 
+            // password
+            // 
+            this.password.AutoSize = true;
+            this.password.Location = new System.Drawing.Point(12, 182);
+            this.password.Name = "password";
+            this.password.Size = new System.Drawing.Size(53, 13);
+            this.password.TabIndex = 10;
+            this.password.Text = "Password";
+            // 
+            // passwordTextBox
+            // 
+            this.passwordTextBox.Location = new System.Drawing.Point(12, 198);
+            this.passwordTextBox.Name = "passwordTextBox";
+            this.passwordTextBox.Size = new System.Drawing.Size(233, 20);
+            this.passwordTextBox.TabIndex = 11;
+            // 
+            // loginTextBox
+            // 
+            this.loginTextBox.Location = new System.Drawing.Point(12, 159);
+            this.loginTextBox.Name = "loginTextBox";
+            this.loginTextBox.Size = new System.Drawing.Size(233, 20);
+            this.loginTextBox.TabIndex = 12;
+            // 
+            // fileTypeComboBox
+            // 
+            this.fileTypeComboBox.FormattingEnabled = true;
+            this.fileTypeComboBox.Location = new System.Drawing.Point(12, 239);
+            this.fileTypeComboBox.Name = "fileTypeComboBox";
+            this.fileTypeComboBox.Size = new System.Drawing.Size(121, 21);
+            this.fileTypeComboBox.TabIndex = 13;
+            this.fileTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.fileTypeComboBox_SelectedIndexChanged);
+            // 
+            // fileTypeLabel
+            // 
+            this.fileTypeLabel.AutoSize = true;
+            this.fileTypeLabel.Location = new System.Drawing.Point(15, 225);
+            this.fileTypeLabel.Name = "fileTypeLabel";
+            this.fileTypeLabel.Size = new System.Drawing.Size(46, 13);
+            this.fileTypeLabel.TabIndex = 14;
+            this.fileTypeLabel.Text = "File type";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1120, 576);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.fileTypeLabel);
+            this.Controls.Add(this.fileTypeComboBox);
+            this.Controls.Add(this.loginTextBox);
+            this.Controls.Add(this.passwordTextBox);
+            this.Controls.Add(this.password);
+            this.Controls.Add(this.login);
+            this.Controls.Add(this.pathToFtp);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.downloadAndSendToServer);
             this.Controls.Add(this.DebugLogLabel);
             this.Controls.Add(this.DebugLog);
             this.Controls.Add(this.localPathToDownloadLabel);
@@ -108,7 +191,15 @@
         private System.Windows.Forms.Label localPathToDownloadLabel;
         private System.Windows.Forms.RichTextBox DebugLog;
         private System.Windows.Forms.Label DebugLogLabel;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button downloadAndSendToServer;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox pathToFtp;
+        private System.Windows.Forms.Label login;
+        private System.Windows.Forms.Label password;
+        private System.Windows.Forms.TextBox passwordTextBox;
+        private System.Windows.Forms.TextBox loginTextBox;
+        private System.Windows.Forms.ComboBox fileTypeComboBox;
+        private System.Windows.Forms.Label fileTypeLabel;
     }
 }
 
