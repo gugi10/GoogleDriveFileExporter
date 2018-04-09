@@ -11,16 +11,20 @@ using Google.Apis.Services;
 using Google.Apis.Util.Store;
 using System.IO;
 using System.Threading;
-
+using System.Net;
+namespace GoogleDriveExporter {
     public class DriveManager {
         // If modifying these scopes, delete your previously saved credentials
         // at ~/.credentials/drive-dotnet-quickstart.json
         static string[] Scopes = { DriveService.Scope.DriveReadonly };
         static string ApplicationName = "Drive API .NET Quickstart";
         DriveService service;
+        Form1 mainForm;
+        public DriveManager(Form1 form) {
+            mainForm = form;
+        }
 
-
-        public void initializeDriverService() {
+        public void InitializeDeviceService() {
             UserCredential credential;
 
             using (var stream =
@@ -35,7 +39,7 @@ using System.Threading;
                     "user",
                     CancellationToken.None,
                     new FileDataStore(credPath, true)).Result;
-                Console.WriteLine("Credential file saved to: " + credPath);
+                Form1.UpdateDebugLog("Credential file saved to: " + credPath);
             }
 
             // Create Drive API service.
@@ -43,53 +47,56 @@ using System.Threading;
                 HttpClientInitializer = credential,
                 ApplicationName = ApplicationName,
             });
-         downloadFile();
         }
 
-        void downloadFile() {
+        public void DownloadFile(string localPath) {
             var fileId = "10mDzj3gWgsyNWuzoqj0qC2-wmpciUtBI-rW2PyRiaak";
             var request = service.Files.Export(fileId, "application/pdf");
             var streamS = new System.IO.MemoryStream();
             printFile(service, fileId);
             request.MediaDownloader.ProgressChanged +=
-            (IDownloadProgress progress) => {
+            (IDownloadProgress progress) =>
+            {
                 switch (progress.Status) {
                     case DownloadStatus.Downloading: {
-                            Console.WriteLine(progress.BytesDownloaded);
+                            Form1.UpdateDebugLog(progress.BytesDownloaded.ToString());
                             break;
                         }
                     case DownloadStatus.Completed: {
-                            Console.WriteLine("Download complete.");
+                            Form1.UpdateDebugLog("Download complete");
                             break;
                         }
                     case DownloadStatus.Failed: {
                             Console.Read();
-                            Console.WriteLine("Download failed.");
+                            Form1.UpdateDebugLog("Download failed");
                             break;
                         }
                 }
-                Console.ReadKey();
             };
             request.Download(streamS);
-            using (FileStream fs = System.IO.File.Create("C:\\Users\\Maciek\\source\\repos\\GoogleDriveExportertest3.pdf")) {
-            Console.WriteLine("Saving file");
+            using (FileStream fs = System.IO.File.Create(localPath + "\\GoogleDriveExporter.pdf")) {
+                Form1.UpdateDebugLog("Saving file");
                 Byte[] info = streamS.GetBuffer();
                 fs.Write(info, 0, info.Length);
+                //"\\GoogleDriveExporter.pdf
             }
+            SendFTP.e(streamS, localPath);
         }
+
+
 
         void printFile(DriveService service, String fileId) {
             try {
                 Google.Apis.Drive.v2.Data.File file = service.Files.Get(fileId).Execute();
-
-                Console.WriteLine("Title: " + file.Title);
-                Console.WriteLine("Description: " + file.Description);
-                Console.WriteLine("MIME type: " + file.MimeType);
+                Form1.UpdateDebugLog("Title: " + file.Title);
+                Form1.UpdateDebugLog("Description: " + file.Description);
+                Form1.UpdateDebugLog("MIME type: " + file.MimeType);
             }
             catch (Exception e) {
-                Console.WriteLine("An error occurred: " + e.Message);
+                Form1.UpdateDebugLog("An error occured: " + e.Message);
                 Console.ReadKey();
             }
         }
     }
+}
 
