@@ -42,17 +42,17 @@
             // 
             // downloadButton
             // 
-            this.downloadButton.Location = new System.Drawing.Point(12, 64);
+            this.downloadButton.Location = new System.Drawing.Point(286, 58);
             this.downloadButton.Name = "downloadButton";
             this.downloadButton.Size = new System.Drawing.Size(233, 24);
             this.downloadButton.TabIndex = 1;
-            this.downloadButton.Text = "Download";
+            this.downloadButton.Text = "Local download";
             this.downloadButton.UseVisualStyleBackColor = true;
             this.downloadButton.Click += new System.EventHandler(this.downloadButton_Click);
             // 
             // localPathToDownload
             // 
-            this.localPathToDownload.Location = new System.Drawing.Point(12, 38);
+            this.localPathToDownload.Location = new System.Drawing.Point(286, 32);
             this.localPathToDownload.Name = "localPathToDownload";
             this.localPathToDownload.Size = new System.Drawing.Size(233, 20);
             this.localPathToDownload.TabIndex = 2;
@@ -60,7 +60,7 @@
             // localPathToDownloadLabel
             // 
             this.localPathToDownloadLabel.AutoSize = true;
-            this.localPathToDownloadLabel.Location = new System.Drawing.Point(9, 22);
+            this.localPathToDownloadLabel.Location = new System.Drawing.Point(283, 16);
             this.localPathToDownloadLabel.Name = "localPathToDownloadLabel";
             this.localPathToDownloadLabel.Size = new System.Drawing.Size(121, 13);
             this.localPathToDownloadLabel.TabIndex = 3;
@@ -68,24 +68,25 @@
             // 
             // DebugLog
             // 
-            this.DebugLog.Location = new System.Drawing.Point(774, 38);
+            this.DebugLog.Location = new System.Drawing.Point(724, 32);
             this.DebugLog.Name = "DebugLog";
-            this.DebugLog.Size = new System.Drawing.Size(334, 526);
+            this.DebugLog.Size = new System.Drawing.Size(384, 532);
             this.DebugLog.TabIndex = 4;
             this.DebugLog.Text = "";
             // 
             // DebugLogLabel
             // 
             this.DebugLogLabel.AutoSize = true;
-            this.DebugLogLabel.Location = new System.Drawing.Point(771, 22);
+            this.DebugLogLabel.Location = new System.Drawing.Point(721, 16);
             this.DebugLogLabel.Name = "DebugLogLabel";
-            this.DebugLogLabel.Size = new System.Drawing.Size(65, 13);
+            this.DebugLogLabel.Size = new System.Drawing.Size(60, 13);
             this.DebugLogLabel.TabIndex = 5;
-            this.DebugLogLabel.Text = "Debug Logs";
+            this.DebugLogLabel.Text = "Debug Log";
+            this.DebugLogLabel.Click += new System.EventHandler(this.DebugLogLabel_Click);
             // 
             // downloadAndSendToServer
             // 
-            this.downloadAndSendToServer.Location = new System.Drawing.Point(12, 266);
+            this.downloadAndSendToServer.Location = new System.Drawing.Point(12, 179);
             this.downloadAndSendToServer.Name = "downloadAndSendToServer";
             this.downloadAndSendToServer.Size = new System.Drawing.Size(233, 23);
             this.downloadAndSendToServer.TabIndex = 6;
@@ -96,7 +97,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 103);
+            this.label1.Location = new System.Drawing.Point(9, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(46, 13);
             this.label1.TabIndex = 7;
@@ -104,7 +105,7 @@
             // 
             // pathToFtp
             // 
-            this.pathToFtp.Location = new System.Drawing.Point(12, 119);
+            this.pathToFtp.Location = new System.Drawing.Point(12, 32);
             this.pathToFtp.Name = "pathToFtp";
             this.pathToFtp.Size = new System.Drawing.Size(233, 20);
             this.pathToFtp.TabIndex = 8;
@@ -113,7 +114,7 @@
             // login
             // 
             this.login.AutoSize = true;
-            this.login.Location = new System.Drawing.Point(12, 142);
+            this.login.Location = new System.Drawing.Point(12, 55);
             this.login.Name = "login";
             this.login.Size = new System.Drawing.Size(33, 13);
             this.login.TabIndex = 9;
@@ -122,7 +123,7 @@
             // password
             // 
             this.password.AutoSize = true;
-            this.password.Location = new System.Drawing.Point(12, 182);
+            this.password.Location = new System.Drawing.Point(12, 95);
             this.password.Name = "password";
             this.password.Size = new System.Drawing.Size(53, 13);
             this.password.TabIndex = 10;
@@ -130,14 +131,14 @@
             // 
             // passwordTextBox
             // 
-            this.passwordTextBox.Location = new System.Drawing.Point(12, 198);
+            this.passwordTextBox.Location = new System.Drawing.Point(12, 111);
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.Size = new System.Drawing.Size(233, 20);
             this.passwordTextBox.TabIndex = 11;
             // 
             // loginTextBox
             // 
-            this.loginTextBox.Location = new System.Drawing.Point(12, 159);
+            this.loginTextBox.Location = new System.Drawing.Point(12, 72);
             this.loginTextBox.Name = "loginTextBox";
             this.loginTextBox.Size = new System.Drawing.Size(233, 20);
             this.loginTextBox.TabIndex = 12;
@@ -145,7 +146,7 @@
             // fileTypeComboBox
             // 
             this.fileTypeComboBox.FormattingEnabled = true;
-            this.fileTypeComboBox.Location = new System.Drawing.Point(12, 239);
+            this.fileTypeComboBox.Location = new System.Drawing.Point(12, 152);
             this.fileTypeComboBox.Name = "fileTypeComboBox";
             this.fileTypeComboBox.Size = new System.Drawing.Size(121, 21);
             this.fileTypeComboBox.TabIndex = 13;
@@ -154,7 +155,7 @@
             // fileTypeLabel
             // 
             this.fileTypeLabel.AutoSize = true;
-            this.fileTypeLabel.Location = new System.Drawing.Point(15, 225);
+            this.fileTypeLabel.Location = new System.Drawing.Point(15, 138);
             this.fileTypeLabel.Name = "fileTypeLabel";
             this.fileTypeLabel.Size = new System.Drawing.Size(46, 13);
             this.fileTypeLabel.TabIndex = 14;

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Globalization;
+using System.IO;
 
 namespace GoogleDriveExporter {
     
@@ -30,12 +31,14 @@ namespace GoogleDriveExporter {
         private void FillTheDataToComboBox() {
             fileTypeComboBox.DisplayMember = "Name";
             fileTypeComboBox.ValueMember = "Value";
+            //https://developers.google.com/drive/v3/web/integrate-open - files format
             comboBoxDataList = new List<FileType>();
             comboBoxDataList.Add(new FileType() { Name = "Microsoft excel", Value = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", FileExtension = "xls" });
             comboBoxDataList.Add(new FileType() { Name = "Open Office sheet", Value = "application/x-vnd.oasis.opendocument.spreadsheet", FileExtension = "xls" });
             comboBoxDataList.Add(new FileType() { Name = "PDF", Value = "application/pdf", FileExtension = "pdf"});
             comboBoxDataList.Add(new FileType() { Name = "CSV", Value = "text/csv", FileExtension = "csv" });
             comboBoxDataList.Add(new FileType() { Name = "TSV", Value = "text/tab-separated-values", FileExtension = "tsv" });
+            //FileStream stream = File.OpenRead("fileTypes.txt");
             fileTypeComboBox.DataSource = comboBoxDataList;
 
         }
@@ -103,7 +106,10 @@ namespace GoogleDriveExporter {
             FileType typeOfFile = (FileType)fileTypeComboBox.SelectedItem;
             return typeOfFile.FileExtension;
         }
-       
+
+        private void DebugLogLabel_Click(object sender, EventArgs e) {
+
+        }
     }
     
 }
