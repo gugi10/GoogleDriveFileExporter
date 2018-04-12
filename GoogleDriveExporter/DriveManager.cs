@@ -53,7 +53,7 @@ namespace GoogleDriveExporter {
 
         public void DownloadFile() {
             var fileId = "10mDzj3gWgsyNWuzoqj0qC2-wmpciUtBI-rW2PyRiaak";
-            var request = service.Files.Export(fileId, "application/pdf");
+            var request = service.Files.Export(fileId, mainForm.GetSelectedValueInComboBox());
             printFile(service, fileId);
             request.MediaDownloader.ProgressChanged +=
             (IDownloadProgress progress) =>
@@ -85,7 +85,7 @@ namespace GoogleDriveExporter {
         }
 
         public void LocalDownloadFile(string localPath) {
-            using (FileStream fs = System.IO.File.Create(localPath + "\\GoogleDriveExporter.pdf")) {
+            using (FileStream fs = System.IO.File.Create(localPath + "\\GoogleDriveExporter."+ mainForm.getFileExtensionFromComboBoxItem())) {
                 Form1.UpdateDebugLog("Saving file");
                 Byte[] info = streamS.GetBuffer();
                 fs.Write(info, 0, info.Length);

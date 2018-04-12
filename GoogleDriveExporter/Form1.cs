@@ -10,17 +10,36 @@ using System.Windows.Forms;
 using System.Globalization;
 
 namespace GoogleDriveExporter {
+    
     public partial class Form1 : Form { 
         DriveManager driveManager;
-        SendFTP ftpToSend;
+        List<FileType> comboBoxDataList;
         static Form1 form1;
+
         public Form1() {
             form1 = this;
             InitializeComponent();
+        }
+
+         private void Form1_Load(object sender, EventArgs e) {
             InitializeTextBox();
             InitializeDirveManager();
+            FillTheDataToComboBox();
         }
-        
+
+        private void FillTheDataToComboBox() {
+            fileTypeComboBox.DisplayMember = "Name";
+            fileTypeComboBox.ValueMember = "Value";
+            comboBoxDataList = new List<FileType>();
+            comboBoxDataList.Add(new FileType() { Name = "Microsoft excel", Value = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", FileExtension = "xls" });
+            comboBoxDataList.Add(new FileType() { Name = "Open Office sheet", Value = "application/x-vnd.oasis.opendocument.spreadsheet", FileExtension = "xls" });
+            comboBoxDataList.Add(new FileType() { Name = "PDF", Value = "application/pdf", FileExtension = "pdf"});
+            comboBoxDataList.Add(new FileType() { Name = "CSV", Value = "text/csv", FileExtension = "csv" });
+            comboBoxDataList.Add(new FileType() { Name = "TSV", Value = "text/tab-separated-values", FileExtension = "tsv" });
+            fileTypeComboBox.DataSource = comboBoxDataList;
+
+        }
+
         private void InitializeTextBox() {
             string path = new Uri(
             System.IO.Path.GetDirectoryName(
@@ -66,10 +85,25 @@ namespace GoogleDriveExporter {
         }
 
         private void helpButton_Click(object sender, EventArgs e) {
-            var result = MessageBox.Show("If you need help with generating api from google drive open: https://developers.google.com/drive/v3/web/quickstart/dotnet","Help",MessageBoxButtons.YesNo);
+            var result = MessageBox.Show("Do you need help with generating google drive api?: https://developers.google.com/drive/v3/web/quickstart/dotnet","Help",MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes) {
                 System.Diagnostics.Process.Start("https://developers.google.com/drive/v3/web/quickstart/dotnet");
             }
         }
+        public string GetSelectedValueInComboBox() {
+            
+            return fileTypeComboBox.SelectedValue.ToString();
+        }
+
+        public string GetSelectedTextInComboBox() {
+            return fileTypeComboBox.GetItemText(fileTypeComboBox.SelectedItem);
+        }
+
+        public string getFileExtensionFromComboBoxItem() {
+            FileType typeOfFile = (FileType)fileTypeComboBox.SelectedItem;
+            return typeOfFile.FileExtension;
+        }
+       
     }
+    
 }
